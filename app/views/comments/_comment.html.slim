@@ -1,0 +1,8 @@
+.comment.callout data-id=comment.id
+  .float-left.text
+    = comment.text
+  .float-right
+    = link_to "delete", comment, method: :delete, remote: true, class: "button small"
+  .clearfix
+  .created_at_h
+    = comment.created_at_h

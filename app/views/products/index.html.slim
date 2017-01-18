@@ -1,0 +1,38 @@
+
+
+.row
+  .medium-12.columns
+    - if params[:search]
+      h3 Found products
+    - else
+      h3 All products
+    .products
+      - @products.each do |product|
+        .product-short-desc
+          .title = link_to product.title, product
+          .description = product.truncated_description
+          .price = product.price
+          .amount = product.current_amount
+          .actions 
+            - if ProductPolicy.new(product, current_user).destroy?
+              = link_to "Удалить товар", product, method: :delete
+
+
+/ .row
+/   .medium-6.columns
+/     .products
+/     h1 Products
+
+/     - @products.each do |product|
+/       .product-short-desc
+/         .title = link_to product.title, product
+/         .description = product.description
+/         .price = product.price
+/         .amount = "На складе: #{product.amount} шт."
+
+
+
+/   .medium-6.columns
+/     p
+/       |Колонка справа
+/     = link_to 'New Product', new_product_path if current_user.administrator?
